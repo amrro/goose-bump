@@ -5,12 +5,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.amr.android.goosebumps.adapter.Movie;
+import com.amr.android.goosebumps.adapter.MoviesAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,8 +34,12 @@ import javax.net.ssl.HttpsURLConnection;
  */
 public class LaunchFragment extends Fragment
 {
+    private final int SPAN_COUNT = 2;
 
     private FetchMoviesTask mFetchMovies;
+    private RecyclerView  mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private MoviesAdapter mAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
@@ -46,11 +53,18 @@ public class LaunchFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.fragment_launch, container, false);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler);
+        mRecyclerView.setHasFixedSize(true);
+
+        mLayoutManager = new GridLayoutManager(getContext(), SPAN_COUNT);
+        mRecyclerView.setLayoutManager(mLayoutManager);
         mFetchMovies = new FetchMoviesTask();
+        mAdapter = new MoviesAdapter(getContext(), new ArrayList<Movie>());
+        mRecyclerView.setAdapter(mAdapter);
+
         mFetchMovies.execute();
         return rootView;
     }
-
 
 
     class FetchMoviesTask extends AsyncTask<Void, Void, ArrayList<Movie>>
@@ -80,7 +94,7 @@ public class LaunchFragment extends Fragment
                 URL url = new URL(uriBuilder.toString());
 
                 // create request and open connection with TheMoviesDB:
-                httpsURLConnection  = (HttpsURLConnection) url.openConnection();
+                httpsURLConnection = (HttpsURLConnection) url.openConnection();
                 httpsURLConnection.setRequestMethod("GET");
                 httpsURLConnection.connect();
 
@@ -107,20 +121,18 @@ public class LaunchFragment extends Fragment
                 // finally getting jason string
                 moviesJsonStr = buffer.toString();
                 //  <<<
-            }
-            catch (MalformedURLException e)
+            } catch (MalformedURLException e)
             {
                 Log.e(TAG, "Invalid URL" + e.getMessage());
             } catch (IOException e)
             {
                 Log.e(TAG, "error! can't open connection" + e.getMessage());
-            }
-            finally
+            } finally
             {
                 if (httpsURLConnection != null)
                     httpsURLConnection.disconnect();
 
-                if(reader != null)
+                if (reader != null)
                     try
                     {
                         reader.close();
@@ -161,7 +173,7 @@ public class LaunchFragment extends Fragment
                                 singleMovie.getInt(Movie.MOVIE_ID),
                                 singleMovie.getBoolean(Movie.MOVIE_ADULT),
                                 getPosterURL(singleMovie.getString(Movie.POSTER_PATH))
-                                )
+                        )
                 );
             }
 
@@ -170,11 +182,19 @@ public class LaunchFragment extends Fragment
 
         private String getPosterURL(String posterPath)
         {
-            return  Uri.parse(Movie.IMAGE_BASE_URL).buildUpon()
-                    .appendPath(Movie.POSTER_SIZES[1])
+            return Uri.parse(Movie.IMAGE_BASE_URL).buildUpon()
+                    .appendPath(Movie.POSTER_SIZES[3])
                     .appendEncodedPath(posterPath)
                     .build().toString();
 
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Movie> movies)
+        {
+            if (movies != null)
+                mAdapter.clear();
+            mAdapter.addAll(movies);
         }
     }
 }
