@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.amr.android.goosebumps.adapter.Movie;
 import com.amr.android.goosebumps.adapter.MoviesAdapter;
@@ -65,7 +66,7 @@ public class LaunchFragment extends Fragment
         mAdapter = new MoviesAdapter(getContext(), new ArrayList<Movie>());
         mRecyclerView.setAdapter(mAdapter);
 
-        mFetchMovies.execute();
+        mFetchMovies.execute("popular");
         return rootView;
     }
 
@@ -73,22 +74,50 @@ public class LaunchFragment extends Fragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
-        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.main, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
+        if (item.getItemId() == R.id.action_most_popular)
+        {
+            String title = item.getTitle().toString();
+
+            if (title == getString(R.string.most_popular))
+            {
+                new FetchMoviesTask().execute("popular");
+                Toast.makeText(getContext(), title, Toast.LENGTH_SHORT).show();
+                item.setTitle(R.string.top_rated);
+            }
+
+
+            if (title == getString(R.string.top_rated))
+            {
+                new FetchMoviesTask().execute("top_rated");
+                Toast.makeText(getContext(), title, Toast.LENGTH_SHORT).show();
+                item.setTitle(R.string.most_popular);
+            }
+
+            Toast.makeText(
+                    getContext(),
+                    "Most Populsr",
+                    Toast.LENGTH_SHORT
+            ).show();
+        }
+
+
+
         return super.onOptionsItemSelected(item);
     }
 
-    class FetchMoviesTask extends AsyncTask<Void, Void, ArrayList<Movie>>
+    class FetchMoviesTask extends AsyncTask<String, Void, ArrayList<Movie>>
     {
 
         private final String TAG = FetchMoviesTask.class.getSimpleName();
 
         @Override
-        protected ArrayList<Movie> doInBackground(Void... params)
+        protected ArrayList<Movie> doInBackground(String... params)
         {
             HttpsURLConnection httpsURLConnection = null;
             BufferedReader reader = null;
@@ -101,7 +130,7 @@ public class LaunchFragment extends Fragment
                 Uri uriBuilder = Uri.parse(Movie.API_BASE_URL)
                         .buildUpon()
                         .appendPath("movie")
-                        .appendPath("popular")
+                        .appendPath(params[0])
                         .appendQueryParameter(QUERY_KEY, Movie.API_KEY)
                         .build();
 

@@ -3,4 +3,6 @@
     <string name="movie_name">Mad Max: Fury Road</string>
 
     <string name="gebbrish">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac scelerisque diam. Etiam porttitor nibh vitae purus luctus, a efficitur orci aliquam. Nulla varius mollis nisi at sagittis. Nam consectetur augue eu consequat feugiat. Aliquam.</string>
+    <string name="most_popular">Most Popular</string>
+    <string name="top_rated">Top Rated</string>
 </resources>
