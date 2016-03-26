@@ -14,7 +14,7 @@ public class LaunchActivity extends AppCompatActivity
 
         if (savedInstanceState == null)
             getSupportFragmentManager().beginTransaction()
-            .replace(R.id.container, new LaunchFragment())
+            .replace(R.id.container, new MovieDetailsFragment())
             .commit();
     }
 }

@@ -3,4 +3,6 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="bg">#607D8B</color>
+    <color name="poster_bg">#B6B6B6</color>
 </resources>
