@@ -8,7 +8,18 @@ public class Movie
     private final String name;
     private final int ID;
     private final boolean adult;
+
     private final String posterURL;
+    private final String MovieOverview;
+    public Movie(String name, int ID, boolean adult, String posterURL, String overview)
+    {
+        this.name = name;
+        this.ID = ID;
+        this.adult = adult;
+        this.posterURL = posterURL;
+        this.MovieOverview = overview;
+    }
+
 
     public Movie(String name, int ID, boolean adult, String posterURL)
     {
@@ -16,8 +27,8 @@ public class Movie
         this.ID = ID;
         this.adult = adult;
         this.posterURL = posterURL;
+        this.MovieOverview = "No OverView";
     }
-
 
     public String getName()
     {
@@ -39,6 +50,10 @@ public class Movie
         return posterURL;
     }
 
+    public String getMovieOverview()
+    {
+        return MovieOverview;
+    }
 
     @Override
     public String toString()
@@ -50,9 +65,14 @@ public class Movie
         );
     }
 
+    public static final String API_BASE_URL = "https://api.themoviedb.org/3";
+    public static final String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
+
+    public static final String API_KEY = "f5d2da75e7729eee412a43da5f542a9c";
+
+    public static final String OVERVIEW =   "overview";
     public static final String ORIGINAL_TITLE = "original_title";
     public static final String MOVIE_ID = "id";
-    public static final String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
     public static final String MOVIE_ADULT = "adult";
     public static final String POSTER_PATH = "poster_path";
     public static final String[] POSTER_SIZES = new String[]

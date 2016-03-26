@@ -69,7 +69,7 @@ public class LaunchFragment extends Fragment
 
     class FetchMoviesTask extends AsyncTask<Void, Void, ArrayList<Movie>>
     {
-        final static String API_KEY = "f5d2da75e7729eee412a43da5f542a9c";
+
         private final String TAG = FetchMoviesTask.class.getSimpleName();
 
         @Override
@@ -83,11 +83,11 @@ public class LaunchFragment extends Fragment
             {
                 final String QUERY_KEY = "api_key";
 
-                Uri uriBuilder = Uri.parse("https://api.themoviedb.org/3")
+                Uri uriBuilder = Uri.parse(Movie.API_BASE_URL)
                         .buildUpon()
                         .appendPath("movie")
                         .appendPath("popular")
-                        .appendQueryParameter(QUERY_KEY, API_KEY)
+                        .appendQueryParameter(QUERY_KEY, Movie.API_KEY)
                         .build();
 
 

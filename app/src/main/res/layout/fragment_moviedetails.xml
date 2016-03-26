@@ -12,7 +12,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/posterview"
+        android:id="@+id/backdrop_view"
         android:src="@drawable/mad_max_poster_w300"
         android:scaleType="fitCenter"
         android:clickable="true"
@@ -26,7 +26,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
+        android:id="@+id/poster_view"
         android:src="@drawable/poster"
         android:layout_marginTop="140dp"
         android:layout_alignParentTop="true"
@@ -44,10 +44,10 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/movie_name"
-        android:id="@+id/textView"
-        android:layout_below="@+id/posterview"
-        android:layout_toRightOf="@+id/imageView2"
-        android:layout_toEndOf="@+id/imageView2"
+        android:id="@+id/movie_title_textview"
+        android:layout_below="@+id/backdrop_view"
+        android:layout_toRightOf="@+id/poster_view"
+        android:layout_toEndOf="@+id/poster_view"
         android:layout_marginLeft="39dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"/>
@@ -57,19 +57,19 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/movie_name"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/textView"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"/>
+        android:id="@+id/movie_info_textview"
+        android:layout_below="@+id/movie_title_textview"
+        android:layout_alignLeft="@+id/movie_title_textview"
+        android:layout_alignStart="@+id/movie_title_textview"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/gebbrish"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/imageView2"
-        android:layout_alignLeft="@+id/imageView2"
-        android:layout_alignStart="@+id/imageView2"
+        android:id="@+id/movie_overview_textview"
+        android:layout_below="@+id/poster_view"
+        android:layout_alignLeft="@+id/poster_view"
+        android:layout_alignStart="@+id/poster_view"
         android:layout_marginLeft="51dp"
         android:minLines="6"
         android:maxLines = "15"
@@ -81,9 +81,9 @@
         android:layout_height="30dp"
         android:id="@+id/imageView3"
         android:src="@drawable/info"
-        android:layout_alignTop="@+id/textView3"
-        android:layout_alignLeft="@+id/imageView2"
-        android:layout_alignStart="@+id/imageView2"
+        android:layout_alignTop="@+id/movie_overview_textview"
+        android:layout_alignLeft="@+id/poster_view"
+        android:layout_alignStart="@+id/poster_view"
         android:layout_marginTop="23dp"/>
 
     <TextView
@@ -93,8 +93,8 @@
         android:text="Cast"
         android:id="@+id/textView4"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3"
+        android:layout_alignLeft="@+id/movie_overview_textview"
+        android:layout_alignStart="@+id/movie_overview_textview"
         android:layout_marginBottom="35dp"/>
 
     <ImageView
