@@ -5,20 +5,12 @@ package com.amr.android.goosebumps.adapter;
  */
 public class Movie
 {
+
     private final String name;
     private final int ID;
     private final boolean adult;
 
     private final String posterURL;
-    private final String MovieOverview;
-    public Movie(String name, int ID, boolean adult, String posterURL, String overview)
-    {
-        this.name = name;
-        this.ID = ID;
-        this.adult = adult;
-        this.posterURL = posterURL;
-        this.MovieOverview = overview;
-    }
 
 
     public Movie(String name, int ID, boolean adult, String posterURL)
@@ -27,7 +19,6 @@ public class Movie
         this.ID = ID;
         this.adult = adult;
         this.posterURL = posterURL;
-        this.MovieOverview = "No OverView";
     }
 
     public String getName()
@@ -50,10 +41,7 @@ public class Movie
         return posterURL;
     }
 
-    public String getMovieOverview()
-    {
-        return MovieOverview;
-    }
+
 
     @Override
     public String toString()
@@ -73,6 +61,7 @@ public class Movie
     public static final String OVERVIEW =   "overview";
     public static final String ORIGINAL_TITLE = "original_title";
     public static final String MOVIE_ID = "id";
+    public static String BACKDROP = "backdrop_path";
     public static final String MOVIE_ADULT = "adult";
     public static final String POSTER_PATH = "poster_path";
     public static final String[] POSTER_SIZES = new String[]
@@ -84,5 +73,14 @@ public class Movie
             "w780",
             "original"
     };
+
+
+    public static final String[] BACKDROP_SIZES = new String[]
+            {
+                    "w300",
+                    "w780",
+                    "w1280",
+                    "original"
+            };
 
 }

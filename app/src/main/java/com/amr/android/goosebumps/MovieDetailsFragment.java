@@ -13,6 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amr.android.goosebumps.adapter.Movie;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -149,6 +153,37 @@ public class MovieDetailsFragment extends Fragment
 
             return detailsJsonStr;
         }
-        
+
+
+        @Override
+        protected void onPostExecute(String s)
+        {
+            super.onPostExecute(s);
+            try
+            {
+                JSONObject movieObject = new JSONObject(s);
+                mMovieTitle.setText(movieObject.getString(Movie.ORIGINAL_TITLE));
+                Picasso.with(getContext()).load(Movie.IMAGE_BASE_URL + Movie.BACKDROP_SIZES[0]
+                        + movieObject.getString(Movie.BACKDROP))
+                        .into(mBackDrop);
+
+
+                Picasso.with(getContext()).load("https://image.tmdb.org/t/p/w185"
+                        + movieObject.getString(Movie.POSTER_PATH))
+                        .into(mMoviePoster);
+
+                mMovieOverview.setText(movieObject.getString("overview"));
+
+                String movieInfo = movieObject.getString("release_date").substring(0, 4)
+                        + " | " + movieObject.getString("runtime") + " mins" +
+                        " | " + movieObject.getInt("vote_average") + "/10";
+
+                mMovieInfo.setText(movieInfo);
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -39,6 +38,7 @@
         android:layout_marginLeft="21dp"
         android:layout_marginStart="21dp"/>
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
         android:layout_alignStart="@+id/poster_view"
         android:layout_marginLeft="51dp"
         android:minLines="6"
-        android:maxLines = "15"
+        android:maxLines = "6"
         android:layout_marginStart="51dp"
         android:layout_marginTop="24dp"/>
 
@@ -105,7 +105,6 @@
         android:layout_alignTop="@+id/textView4"
         android:layout_alignLeft="@+id/imageView3"
         android:layout_alignStart="@+id/imageView3"/>
-
 
     <!--
 
