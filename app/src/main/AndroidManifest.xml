@@ -17,6 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+
+        <activity android:name=".MovieDetailActivity"
+                  android:parentActivityName="com.amr.android.goosebumps.LaunchActivity" >
+        </activity>
     </application>
 
 </manifest>

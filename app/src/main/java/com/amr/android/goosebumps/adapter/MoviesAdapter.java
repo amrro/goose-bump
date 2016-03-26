@@ -1,12 +1,15 @@
 package com.amr.android.goosebumps.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.amr.android.goosebumps.MovieDetailActivity;
 import com.amr.android.goosebumps.R;
 import com.squareup.picasso.Picasso;
 
@@ -60,12 +63,29 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieHolde
         mMoviesSet.addAll(movies);
     }
 
+
+
     public class MovieHolder extends RecyclerView.ViewHolder
     {
+        private final String TAG = MovieHolder.class.getSimpleName();
         private ImageView posterView;
         public MovieHolder(View itemView)
         {
             super(itemView);
+            itemView.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent detailsIntent = new Intent(v.getContext(), MovieDetailActivity.class);
+                    Log.i(TAG, mMoviesSet.get(getPosition()).getID() + "");
+                    detailsIntent.putExtra(
+                            Movie.MOVIE_ID,
+                            mMoviesSet.get(getPosition()).getID()
+                    );
+                    mContext.startActivity(detailsIntent);
+                }
+            });
             posterView = (ImageView) itemView.findViewById(R.id.poster_view);
         }
 
